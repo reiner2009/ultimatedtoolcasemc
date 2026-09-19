@@ -1,0 +1,36 @@
+package de.reiner.toolcasemc.entity;
+
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobCategory;
+
+
+public class ModEntityTypes {
+    public static void init(){}
+
+    private static ResourceKey<EntityType<?>> createID(final String name) {
+        return ResourceKey.create(Registries.ENTITY_TYPE, Identifier.withDefaultNamespace(name));
+    }
+
+    private static <T extends Entity> EntityType<T> register(ResourceKey<EntityType<?>> key, EntityType.Builder<T> builder) {
+        return Registry.register(BuiltInRegistries.ENTITY_TYPE, key, builder.build(key));
+    }
+
+    public static final EntityType<ThrownSickle> SICKLE = register(
+            createID("sickle"),
+            EntityType.Builder.<ThrownSickle>of(
+                            ThrownSickle::new,
+                            MobCategory.MISC
+                    )
+                    .noLootTable()
+                    .sized(0.5F, 0.5F)
+                    .eyeHeight(0.13F)
+                    .clientTrackingRange(4)
+                    .updateInterval(20)
+    );
+}

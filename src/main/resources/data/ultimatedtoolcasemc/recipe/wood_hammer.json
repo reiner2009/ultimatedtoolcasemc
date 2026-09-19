@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "III",
+    " s ",
+    " S "
+  ],
+  "key": {
+    "I": [
+      "minecraft:iron_block"
+    ],
+    "s": [
+      "minecraft:stick"
+    ],
+    "S": [
+      "minecraft:iron_axe"
+    ]
+  },
+  "result": {
+    "id": "ultimatedtoolcasemc:wood_hammer",
+    "count": 1
+  }
+}

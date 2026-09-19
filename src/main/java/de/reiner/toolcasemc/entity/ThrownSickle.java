@@ -1,0 +1,153 @@
+package de.reiner.toolcasemc.entity;
+
+import java.util.Collection;
+import java.util.List;
+import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.ProjectileDeflection;
+import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.EntityHitResult;
+import net.minecraft.world.phys.Vec3;
+import org.jspecify.annotations.Nullable;
+
+public class ThrownSickle extends AbstractArrow {
+    private boolean dealtDamage = false;
+
+    public ThrownSickle(ServerLevel level, LivingEntity owner, ItemStack stack) {
+        super(ModEntityTypes.SICKLE, level);
+        this.setOwner(owner);
+        this.setPickupItemStack(stack);
+    }
+
+    public ThrownSickle(EntityType<ThrownSickle> entityType, Level level) {
+        super(entityType, level);
+    }
+
+    public ThrownSickle(Level level, double x, double y, double z, ItemStack stack) {
+        super(ModEntityTypes.SICKLE, level);
+        this.setPos(x, y, z);
+        this.setPickupItemStack(stack);
+    }
+
+    protected void defineSynchedData(final SynchedEntityData.Builder entityData) {
+        super.defineSynchedData(entityData);
+    }
+
+    public void tick() {
+        if (this.inGroundTime > 4) {
+            this.dealtDamage = true;
+        }
+        super.tick();
+    }
+
+    protected @Nullable EntityHitResult findHitEntity(final Vec3 from, final Vec3 to) {
+        return this.dealtDamage ? null : super.findHitEntity(from, to);
+    }
+
+    protected Collection<EntityHitResult> findHitEntities(final Vec3 from, final Vec3 to) {
+        EntityHitResult e = this.findHitEntity(from, to);
+        return e != null ? List.of(e) : List.of();
+    }
+
+    protected void onHitEntity(final EntityHitResult hitResult) {
+        Entity entity = hitResult.getEntity();
+        float dmg = 8.0F;
+        Entity currentOwner = this.getOwner();
+        DamageSource damageSource = this.damageSources().trident(this, (currentOwner == null ? this : currentOwner));
+        Level var7 = this.level();
+        if (var7 instanceof ServerLevel serverLevel) {
+            dmg = EnchantmentHelper.modifyDamage(serverLevel, this.getWeaponItem(), entity, damageSource, dmg);
+        }
+
+        this.dealtDamage = true;
+        boolean wasHurt = entity.hurtOrSimulate(damageSource, dmg);
+        if (wasHurt) {
+            Level var8 = this.level();
+            if (var8 instanceof ServerLevel) {
+                ServerLevel serverLevel = (ServerLevel)var8;
+                EnchantmentHelper.doPostAttackEffectsWithItemSourceOnBreak(serverLevel, entity, damageSource, this.getWeaponItem(), (weapon) -> this.kill(serverLevel));
+            }
+
+            if (entity instanceof LivingEntity) {
+                LivingEntity mob = (LivingEntity)entity;
+                this.doKnockback(mob, damageSource);
+                this.doPostHurtEffects(mob);
+            }
+        }
+
+        if (entity.projectileReceivesSideEffectsOnHit(wasHurt)) {
+            this.playSound(SoundEvents.TRIDENT_HIT, 1.0F, 1.0F);
+            this.deflect(ProjectileDeflection.REVERSE, entity, this.owner, false, new Vec3(0.02, 0.2, 0.02));
+        }
+
+    }
+
+    protected void hitBlockEnchantmentEffects(final ServerLevel level, final BlockHitResult hitResult, final ItemStack weapon) {
+        Vec3 compensatedHitPosition = hitResult.getBlockPos().clampLocationWithin(hitResult.getLocation());
+        Entity var6 = this.getOwner();
+        LivingEntity var10002;
+        if (var6 instanceof LivingEntity livingOwner) {
+            var10002 = livingOwner;
+        } else {
+            var10002 = null;
+        }
+
+        EnchantmentHelper.onHitBlock(level, weapon, var10002, this, null, compensatedHitPosition, level.getBlockState(hitResult.getBlockPos()), (item) -> this.kill(level));
+    }
+
+    public ItemStack getWeaponItem() {
+        return this.getPickupItemStackOrigin();
+    }
+
+    protected boolean tryPickup(final Player player) {
+        return super.tryPickup(player) || this.isNoPhysics() && this.ownedBy(player) && player.getInventory().add(this.getPickupItem());
+    }
+
+    protected ItemStack getDefaultPickupItem() {
+        return new ItemStack(Items.TRIDENT);
+    }
+
+    protected SoundEvent getDefaultHitGroundSoundEvent() {
+        return SoundEvents.TRIDENT_HIT_GROUND;
+    }
+
+    public void playerTouch(final Player player) {
+        if (this.ownedBy(player) || this.getOwner() == null) {
+            super.playerTouch(player);
+        }
+
+    }
+
+    protected void readAdditionalSaveData(final ValueInput input) {
+        super.readAdditionalSaveData(input);
+        this.dealtDamage = input.getBooleanOr("DealtDamage", false);
+    }
+
+    protected void addAdditionalSaveData(final ValueOutput output) {
+        super.addAdditionalSaveData(output);
+        output.putBoolean("DealtDamage", this.dealtDamage);
+    }
+
+    protected float getWaterInertia() {
+        return 0.99F;
+    }
+
+    public boolean shouldRender(final double camX, final double camY, final double camZ) {
+        return true;
+    }
+
+}

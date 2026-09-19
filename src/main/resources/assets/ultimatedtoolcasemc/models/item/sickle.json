@@ -1,0 +1,29 @@
+{
+	"parent": "minecraft:item/generated",
+	"textures": {
+		"layer0": "ultimatedtoolcasemc:item/sickle"
+	},
+	"display": {
+		"thirdperson_righthand": {
+			"translation": [-4.5, 8, 0.75],
+			"scale": [1.5, 1.5, 0.5]
+		},
+		"thirdperson_lefthand": {
+			"rotation": [0, 180, 0],
+			"translation": [-4.5, 8, 0.75],
+			"scale": [1.5, 1.5, 0.5]
+		},
+		"firstperson_righthand": {
+			"rotation": [-25, 0, 0],
+			"scale": [1.5, 1.5, 0.5]
+		},
+		"firstperson_lefthand": {
+			"rotation": [-25, 180, 0],
+			"scale": [1.5, 1.5, 0.5]
+		},
+		"ground": {
+			"translation": [0, 7, 0],
+			"scale": [1.5, 1.5, 0.5]
+		}
+	}
+}

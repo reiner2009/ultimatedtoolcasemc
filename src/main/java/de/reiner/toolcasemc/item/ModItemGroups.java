@@ -14,10 +14,13 @@ public class ModItemGroups {
             BuiltInRegistries.CREATIVE_MODE_TAB.key(), UltimatedToolCaseMC.id("tools")
     );
     public static final CreativeModeTab TOOL_ITEM_GROUP = FabricCreativeModeTab.builder()
-            .icon(() -> new ItemStack(ModItems.WOODEN_HAMMER))
+            .icon(() -> new ItemStack(ModItems.STONE_HAMMER))
             .title(Component.translatable("creativeTab."+UltimatedToolCaseMC.MOD_ID))
             .displayItems((params, output) -> {
-                output.accept(ModItems.WOODEN_HAMMER);
+                output.accept(ModItems.STONE_HAMMER);
+                output.accept(ModItems.DIRT_HAMMER);
+                output.accept(ModItems.WOOD_HAMMER);
+                output.accept(ModItems.SICKLE);
             })
             .build();
     public static void init(){

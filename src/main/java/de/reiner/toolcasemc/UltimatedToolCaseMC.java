@@ -1,5 +1,6 @@
 package de.reiner.toolcasemc;
 
+import de.reiner.toolcasemc.entity.ModEntityTypes;
 import de.reiner.toolcasemc.item.ModItemGroups;
 import de.reiner.toolcasemc.item.ModItems;
 import net.fabricmc.api.ModInitializer;
@@ -17,6 +18,7 @@ public class UltimatedToolCaseMC implements ModInitializer {
 	public void onInitialize() {
         ModItems.init();
         ModItemGroups.init();
+        ModEntityTypes.init();
 		LOGGER.info("Initialize "+MOD_ID);
 	}
 
