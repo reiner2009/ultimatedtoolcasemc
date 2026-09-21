@@ -2,9 +2,12 @@ package de.reiner.toolcasemc.entity;
 
 import java.util.Collection;
 import java.util.List;
+
+import de.reiner.toolcasemc.damageType.ModDamageType;
+import de.reiner.toolcasemc.item.ModItems;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
@@ -14,7 +17,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ProjectileDeflection;
 import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.storage.ValueInput;
@@ -67,12 +69,11 @@ public class ThrownSickle extends AbstractArrow {
         Entity entity = hitResult.getEntity();
         float dmg = 8.0F;
         Entity currentOwner = this.getOwner();
-        DamageSource damageSource = this.damageSources().trident(this, (currentOwner == null ? this : currentOwner));
+        DamageSource damageSource = new DamageSource(level().registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).get(ModDamageType.SICKLE_DAMAGE.identifier()).orElseThrow(), this, currentOwner);
         Level var7 = this.level();
         if (var7 instanceof ServerLevel serverLevel) {
             dmg = EnchantmentHelper.modifyDamage(serverLevel, this.getWeaponItem(), entity, damageSource, dmg);
         }
-
         this.dealtDamage = true;
         boolean wasHurt = entity.hurtOrSimulate(damageSource, dmg);
         if (wasHurt) {
@@ -88,9 +89,8 @@ public class ThrownSickle extends AbstractArrow {
                 this.doPostHurtEffects(mob);
             }
         }
-
         if (entity.projectileReceivesSideEffectsOnHit(wasHurt)) {
-            this.playSound(SoundEvents.TRIDENT_HIT, 1.0F, 1.0F);
+            this.playSound(SoundEvents.PLAYER_ATTACK_SWEEP, 1.0F, 1.0F);
             this.deflect(ProjectileDeflection.REVERSE, entity, this.owner, false, new Vec3(0.02, 0.2, 0.02));
         }
 
@@ -105,7 +105,6 @@ public class ThrownSickle extends AbstractArrow {
         } else {
             var10002 = null;
         }
-
         EnchantmentHelper.onHitBlock(level, weapon, var10002, this, null, compensatedHitPosition, level.getBlockState(hitResult.getBlockPos()), (item) -> this.kill(level));
     }
 
@@ -118,11 +117,7 @@ public class ThrownSickle extends AbstractArrow {
     }
 
     protected ItemStack getDefaultPickupItem() {
-        return new ItemStack(Items.TRIDENT);
-    }
-
-    protected SoundEvent getDefaultHitGroundSoundEvent() {
-        return SoundEvents.TRIDENT_HIT_GROUND;
+        return new ItemStack(ModItems.SICKLE);
     }
 
     public void playerTouch(final Player player) {

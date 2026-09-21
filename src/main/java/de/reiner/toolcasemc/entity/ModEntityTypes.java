@@ -28,8 +28,8 @@ public class ModEntityTypes {
                             MobCategory.MISC
                     )
                     .noLootTable()
-                    .sized(0.5F, 0.5F)
-                    .eyeHeight(0.13F)
+                    .sized(1.0F, 1.0F)
+                    .eyeHeight(0.5F)
                     .clientTrackingRange(4)
                     .updateInterval(20)
     );

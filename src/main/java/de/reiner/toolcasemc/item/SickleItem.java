@@ -5,6 +5,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Position;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -24,7 +25,6 @@ public class SickleItem extends Item implements ProjectileItem {
         super(properties);
     }
 
-    @Override
     public boolean mineBlock(ItemStack stack, Level level, BlockState state, BlockPos pos, LivingEntity entity){
         for(int x=pos.getX()-1; x<=pos.getX()+1; x++){
             for(int z=pos.getZ()-1; z<=pos.getZ()+1; z++){

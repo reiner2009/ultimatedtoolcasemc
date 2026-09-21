@@ -17,7 +17,7 @@ public class ThrownSickleEntityModel extends EntityModel<ThrownSickleRenderState
     public static LayerDefinition createLayer() {
         MeshDefinition mesh = new MeshDefinition();
         PartDefinition root = mesh.getRoot();
-        PartDefinition pole = root.addOrReplaceChild("pole", CubeListBuilder.create().texOffs(-16, 0).addBox(-8.0F, 0.0F, -8.0F, 16.0F, 0.0F, 16.0F), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 90.0F, 0.0F, 0.0F));
-        return LayerDefinition.create(mesh, 16, 16);
+        root.addOrReplaceChild("sickle", CubeListBuilder.create().texOffs(-32, 0).addBox(-16.0F, 8.0F, -16.0F, 32.0F, 0.0F, 32.0F), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 90.0F, 90.0F, 0.0F));
+        return LayerDefinition.create(mesh, 32, 32);
     }
 }
