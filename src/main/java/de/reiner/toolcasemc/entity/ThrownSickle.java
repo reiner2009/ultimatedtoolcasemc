@@ -5,6 +5,8 @@ import java.util.List;
 
 import de.reiner.toolcasemc.damageType.ModDamageType;
 import de.reiner.toolcasemc.item.ModItems;
+import de.reiner.toolcasemc.item.SickleItem;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
@@ -45,26 +47,37 @@ public class ThrownSickle extends AbstractArrow {
         this.setPickupItemStack(stack);
     }
 
+    @Override
     protected void defineSynchedData(final SynchedEntityData.Builder entityData) {
         super.defineSynchedData(entityData);
     }
 
+    @Override
     public void tick() {
         if (this.inGroundTime > 4) {
             this.dealtDamage = true;
         }
+        int x=(int)Math.floor(this.getX());
+        int y=(int)Math.floor(this.getY());
+        int z=(int)Math.floor(this.getZ());
+        if (SickleItem.isPlantBlock(x, y, z, this.level())){
+            this.level().destroyBlock(new BlockPos(x, y,z), true, this.getOwner(), 512);
+        }
         super.tick();
     }
 
+    @Override
     protected @Nullable EntityHitResult findHitEntity(final Vec3 from, final Vec3 to) {
         return this.dealtDamage ? null : super.findHitEntity(from, to);
     }
 
+    @Override
     protected Collection<EntityHitResult> findHitEntities(final Vec3 from, final Vec3 to) {
         EntityHitResult e = this.findHitEntity(from, to);
         return e != null ? List.of(e) : List.of();
     }
 
+    @Override
     protected void onHitEntity(final EntityHitResult hitResult) {
         Entity entity = hitResult.getEntity();
         float dmg = 8.0F;
@@ -82,7 +95,6 @@ public class ThrownSickle extends AbstractArrow {
                 ServerLevel serverLevel = (ServerLevel)var8;
                 EnchantmentHelper.doPostAttackEffectsWithItemSourceOnBreak(serverLevel, entity, damageSource, this.getWeaponItem(), (weapon) -> this.kill(serverLevel));
             }
-
             if (entity instanceof LivingEntity) {
                 LivingEntity mob = (LivingEntity)entity;
                 this.doKnockback(mob, damageSource);
@@ -96,6 +108,7 @@ public class ThrownSickle extends AbstractArrow {
 
     }
 
+    @Override
     protected void hitBlockEnchantmentEffects(final ServerLevel level, final BlockHitResult hitResult, final ItemStack weapon) {
         Vec3 compensatedHitPosition = hitResult.getBlockPos().clampLocationWithin(hitResult.getLocation());
         Entity var6 = this.getOwner();
@@ -108,18 +121,22 @@ public class ThrownSickle extends AbstractArrow {
         EnchantmentHelper.onHitBlock(level, weapon, var10002, this, null, compensatedHitPosition, level.getBlockState(hitResult.getBlockPos()), (item) -> this.kill(level));
     }
 
+    @Override
     public ItemStack getWeaponItem() {
         return this.getPickupItemStackOrigin();
     }
 
+    @Override
     protected boolean tryPickup(final Player player) {
         return super.tryPickup(player) || this.isNoPhysics() && this.ownedBy(player) && player.getInventory().add(this.getPickupItem());
     }
 
+    @Override
     protected ItemStack getDefaultPickupItem() {
         return new ItemStack(ModItems.SICKLE);
     }
 
+    @Override
     public void playerTouch(final Player player) {
         if (this.ownedBy(player) || this.getOwner() == null) {
             super.playerTouch(player);
@@ -127,22 +144,25 @@ public class ThrownSickle extends AbstractArrow {
 
     }
 
+    @Override
     protected void readAdditionalSaveData(final ValueInput input) {
         super.readAdditionalSaveData(input);
         this.dealtDamage = input.getBooleanOr("DealtDamage", false);
     }
 
+    @Override
     protected void addAdditionalSaveData(final ValueOutput output) {
         super.addAdditionalSaveData(output);
         output.putBoolean("DealtDamage", this.dealtDamage);
     }
 
+    @Override
     protected float getWaterInertia() {
         return 0.99F;
     }
 
+    @Override
     public boolean shouldRender(final double camX, final double camY, final double camZ) {
         return true;
     }
-
 }

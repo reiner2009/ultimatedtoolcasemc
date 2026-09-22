@@ -1,5 +1,6 @@
 package de.reiner.toolcasemc.entity;
 
+import de.reiner.toolcasemc.UltimatedToolCaseMC;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -14,7 +15,7 @@ public class ModEntityTypes {
     public static void init(){}
 
     private static ResourceKey<EntityType<?>> createID(final String name) {
-        return ResourceKey.create(Registries.ENTITY_TYPE, Identifier.withDefaultNamespace(name));
+        return ResourceKey.create(Registries.ENTITY_TYPE, Identifier.fromNamespaceAndPath(UltimatedToolCaseMC.MOD_ID, name));
     }
 
     private static <T extends Entity> EntityType<T> register(ResourceKey<EntityType<?>> key, EntityType.Builder<T> builder) {

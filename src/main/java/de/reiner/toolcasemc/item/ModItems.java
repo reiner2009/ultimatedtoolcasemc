@@ -41,6 +41,7 @@ public class ModItems {
                     .axe(ToolMaterial.IRON, 1.0F, -1.0F)
     );
 
+    public static final Item CHISEL=register("chisel", ChiselItem::new, new Item.Properties().stacksTo(1).durability(250));
     public static final Item SICKLE=register("sickle", SickleItem::new, new Item.Properties().sword(ToolMaterial.IRON, 3.0F, -2.4F));
 
 }

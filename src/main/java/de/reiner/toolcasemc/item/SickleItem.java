@@ -5,8 +5,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Position;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
@@ -18,6 +16,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemUseAnimation;
 import net.minecraft.world.item.ProjectileItem;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.VegetationBlock;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class SickleItem extends Item implements ProjectileItem {
@@ -25,10 +26,16 @@ public class SickleItem extends Item implements ProjectileItem {
         super(properties);
     }
 
+    public static boolean isPlantBlock(int x, int y, int z, Level level){
+        Block block = level.getBlockState(new BlockPos(x, y, z)).getBlock();
+        return block instanceof VegetationBlock || block == Blocks.SUGAR_CANE;
+    }
+
+    @Override
     public boolean mineBlock(ItemStack stack, Level level, BlockState state, BlockPos pos, LivingEntity entity){
         for(int x=pos.getX()-1; x<=pos.getX()+1; x++){
             for(int z=pos.getZ()-1; z<=pos.getZ()+1; z++){
-                if(level.getBlockState(new BlockPos(x, pos.getY(), z)).is(BlockTags.CROPS)) {
+                if (isPlantBlock(x, pos.getY(), z, level)){
                     level.destroyBlock(new BlockPos(x, pos.getY(), z), true, entity, 512);
                 }
             }
@@ -36,15 +43,18 @@ public class SickleItem extends Item implements ProjectileItem {
         return super.mineBlock(stack, level, state, pos, entity);
     }
 
-    public int getUseDuration(final ItemStack itemStack, final LivingEntity user) {
+    @Override
+    public int getUseDuration(ItemStack itemStack, LivingEntity user) {
         return 72000;
     }
 
-    public ItemUseAnimation getUseAnimation(final ItemStack itemStack) {
+    @Override
+    public ItemUseAnimation getUseAnimation(ItemStack itemStack) {
         return ItemUseAnimation.TRIDENT;
     }
 
-    public boolean releaseUsing(final ItemStack itemStack, final Level level, final LivingEntity entity, final int remainingTime) {
+    @Override
+    public boolean releaseUsing(ItemStack itemStack, Level level, LivingEntity entity, int remainingTime) {
         if (!(entity instanceof Player player)) {
             return false;
         }
@@ -67,13 +77,15 @@ public class SickleItem extends Item implements ProjectileItem {
         return true;
     }
 
-    public Projectile asProjectile(final Level level, final Position position, final ItemStack itemStack, final Direction direction) {
+    @Override
+    public Projectile asProjectile(Level level, Position position, ItemStack itemStack, Direction direction) {
         ThrownSickle sickle = new ThrownSickle(level, position.x(), position.y(), position.z(), itemStack.copyWithCount(1));
         sickle.pickup = AbstractArrow.Pickup.ALLOWED;
         return sickle;
     }
 
-    public InteractionResult use(final Level level, final Player player, final InteractionHand hand) {
+    @Override
+    public InteractionResult use(Level level, Player player, InteractionHand hand) {
         ItemStack itemInHand = player.getItemInHand(hand);
         if (itemInHand.nextDamageWillBreak()) {
             return InteractionResult.FAIL;

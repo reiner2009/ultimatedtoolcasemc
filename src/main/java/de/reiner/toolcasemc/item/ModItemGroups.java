@@ -21,6 +21,7 @@ public class ModItemGroups {
                 output.accept(ModItems.DIRT_HAMMER);
                 output.accept(ModItems.WOOD_HAMMER);
                 output.accept(ModItems.SICKLE);
+                output.accept(ModItems.CHISEL);
             })
             .build();
     public static void init(){
