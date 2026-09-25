@@ -57,11 +57,13 @@ public class ThrownSickle extends AbstractArrow {
         if (this.inGroundTime > 4) {
             this.dealtDamage = true;
         }
-        int x=(int)Math.floor(this.getX());
-        int y=(int)Math.floor(this.getY());
-        int z=(int)Math.floor(this.getZ());
-        if (SickleItem.isPlantBlock(x, y, z, this.level())){
-            this.level().destroyBlock(new BlockPos(x, y,z), true, this.getOwner(), 512);
+        BlockPos pos = this.blockPosition();
+        for(int x=pos.getX()-1; x<=pos.getX()+1; x++){
+            for(int z=pos.getZ()-1; z<=pos.getZ()+1; z++) {
+                if (SickleItem.isPlantBlock(x, pos.getY(), z, this.level())) {
+                    this.level().destroyBlock(new BlockPos(x, pos.getY(), z), true, this.getOwner(), 512);
+                }
+            }
         }
         super.tick();
     }

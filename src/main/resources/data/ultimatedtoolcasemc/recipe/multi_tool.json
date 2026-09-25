@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " p ",
+    "aws",
+    " h "
+  ],
+  "key": {
+    "w": [
+      "ultimatedtoolcasemc:warden_star"
+    ],
+    "p": [
+      "minecraft:diamond_pickaxe"
+    ],
+    "s": [
+      "minecraft:diamond_shovel"
+    ],
+    "h": [
+      "minecraft:diamond_hoe"
+    ],
+    "a": [
+      "minecraft:diamond_axe"
+    ]
+  },
+  "result": {
+    "id": "ultimatedtoolcasemc:multi_tool",
+    "count": 1
+  }
+}

@@ -1,18 +1,19 @@
 package de.reiner.toolcasemc.item;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.HitResult;
 
 import java.util.HashMap;
 
@@ -47,22 +48,28 @@ public class ChiselItem extends Item {
     }
 
     @Override
-    public InteractionResult use(final Level level, final Player player, final InteractionHand hand){
-        HitResult hit = player.pick(5.0D, 0.0F, false);
-        if (hit.getType() == HitResult.Type.BLOCK) {
-            BlockPos blockPos = ((BlockHitResult) hit).getBlockPos();
-            Block keyBlock=level.getBlockState(blockPos).getBlock();
-            if(BLOCK_HASH_MAP.containsKey(keyBlock)){
-                BlockState blockState=BLOCK_HASH_MAP.get(keyBlock).defaultBlockState();
+    public InteractionResult useOn(final UseOnContext context) {
+        if(!context.getLevel().isClientSide()){
+            BlockPos blockPos = context.getClickedPos();
+            Level level = (ServerLevel) context.getLevel();
+            InteractionHand hand = context.getHand();
+            Player player = (ServerPlayer) context.getPlayer();
+            Block keyBlock = level.getBlockState(blockPos).getBlock();
+            if (BLOCK_HASH_MAP.containsKey(keyBlock)) {
+                BlockState blockState = BLOCK_HASH_MAP.get(keyBlock).defaultBlockState();
                 level.setBlock(blockPos, blockState, Block.UPDATE_NEIGHBORS | Block.UPDATE_CLIENTS, 512);
                 player.getItemInHand(hand).hurtAndBreak(1, player, hand);
                 level.playSound(null, blockPos, SoundEvents.GRINDSTONE_USE, SoundSource.BLOCKS, 1.0F, 1.0F);
                 return InteractionResult.SUCCESS;
-            }else{
+            } else {
                 return InteractionResult.FAIL;
             }
         } else {
-            return InteractionResult.FAIL;
+            if(BLOCK_HASH_MAP.containsKey(context.getLevel().getBlockState(context.getClickedPos()).getBlock())){
+                return InteractionResult.SUCCESS;
+            } else {
+                return InteractionResult.FAIL;
+            }
         }
     }
 }
