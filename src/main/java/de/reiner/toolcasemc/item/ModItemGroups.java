@@ -25,6 +25,7 @@ public class ModItemGroups {
                 output.accept(ModItems.CHISEL);
                 output.accept(ModItems.MULTI_TOOL);
                 output.accept(ModItems.WARDEN_STAR);
+                output.accept(ModItems.POINTED_CHISEL);
             })
             .build();
     public static void init(){

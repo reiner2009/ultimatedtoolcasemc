@@ -1,0 +1,19 @@
+{
+  "criteria": {
+    "has_iron": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "ultimatedtoolcasemc:chisel"
+          }
+        ]
+      }
+    }
+  },
+  "rewards": {
+    "recipes": [
+      "ultimatedtoolcasemc:pointed_chisel"
+    ]
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "C",
+    "D",
+    "N"
+  ],
+  "key": {
+    "C": [
+      "ultimatedtoolcasemc:chisel"
+    ],
+    "D": [
+      "minecraft:diamond"
+    ],
+    "N": [
+      "minecraft:iron_nugget"
+    ]
+  },
+  "result": {
+    "id": "ultimatedtoolcasemc:pointed_chisel",
+    "count": 1
+  }
+}

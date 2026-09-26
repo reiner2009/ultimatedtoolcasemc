@@ -3,6 +3,7 @@ package de.reiner.toolcasemc;
 import de.reiner.toolcasemc.entity.ModEntityTypes;
 import de.reiner.toolcasemc.item.ModItemGroups;
 import de.reiner.toolcasemc.item.ModItems;
+import de.reiner.toolcasemc.tag.ModBlockTags;
 import net.fabricmc.api.ModInitializer;
 
 import net.minecraft.resources.Identifier;
@@ -19,6 +20,7 @@ public class UltimatedToolCaseMC implements ModInitializer {
         ModItems.init();
         ModItemGroups.init();
         ModEntityTypes.init();
+        ModBlockTags.init();
 		LOGGER.info("Initialize "+MOD_ID);
 	}
 

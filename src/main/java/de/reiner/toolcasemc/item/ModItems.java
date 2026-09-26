@@ -53,5 +53,6 @@ public class ModItems {
     public static final Item SICKLE=register("sickle", SickleItem::new, new Item.Properties().sword(ToolMaterial.IRON, 3.0F, -2.4F));
     public static final Item THROWING_KNIVES=register("throwing_knives", ThrowingKnivesItem::new, new Item.Properties().sword(ToolMaterial.IRON, 1.0F, 0.0F));
     public static final Item WARDEN_STAR=register("warden_star", Item::new, new Item.Properties());
+    public static final Item POINTED_CHISEL=register("pointed_chisel", PointedChiselItem::new, new Item.Properties().durability(100).stacksTo(1));
 
 }
