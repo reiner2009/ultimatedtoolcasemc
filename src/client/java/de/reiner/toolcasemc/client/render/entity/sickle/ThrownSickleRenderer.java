@@ -1,8 +1,9 @@
-package de.reiner.toolcasemc.client.render.entity;
+package de.reiner.toolcasemc.client.render.entity.sickle;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import de.reiner.toolcasemc.UltimatedToolCaseMC;
+import de.reiner.toolcasemc.client.render.entity.ModEntityModelLayers;
 import de.reiner.toolcasemc.entity.ThrownSickle;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.EntityRenderer;

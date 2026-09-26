@@ -18,7 +18,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import java.util.HashMap;
 
 public class ChiselItem extends Item {
-    public static final HashMap<Block, Block> BLOCK_HASH_MAP = new HashMap<>() {{
+    private static final HashMap<Block, Block> BLOCK_HASH_MAP = new HashMap<>() {{
         put(Blocks.STONE, Blocks.STONE_BRICKS);
         put(Blocks.STONE_BRICKS, Blocks.CHISELED_STONE_BRICKS);
         put(Blocks.COBBLESTONE, Blocks.STONE);

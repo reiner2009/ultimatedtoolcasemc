@@ -7,6 +7,9 @@
   "item.ultimatedtoolcasemc.chisel": "Chisel",
   "item.ultimatedtoolcasemc.multi_tool": "Multi Tool",
   "item.ultimatedtoolcasemc.warden_star": "Warden Star",
+  "item.ultimatedtoolcasemc.throwing_knives": "Throwing Knives",
   "death.attack.sickle": "%1$s was struck down with a sickle by %2$s",
-  "death.attack.sickle.item": "%1$s was struck down by %2$s using %3$s"
+  "death.attack.sickle.item": "%1$s was struck down by %2$s using %3$s",
+  "death.attack.knive": "%1$s was struck down with a knive by %2$s",
+  "death.attack.knive.item": "%1$s was struck down by %2$s using %3$s"
 }

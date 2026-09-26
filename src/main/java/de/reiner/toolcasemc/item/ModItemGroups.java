@@ -21,6 +21,7 @@ public class ModItemGroups {
                 output.accept(ModItems.DIRT_HAMMER);
                 output.accept(ModItems.WOOD_HAMMER);
                 output.accept(ModItems.SICKLE);
+                output.accept(ModItems.THROWING_KNIVES);
                 output.accept(ModItems.CHISEL);
                 output.accept(ModItems.MULTI_TOOL);
                 output.accept(ModItems.WARDEN_STAR);

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " I",
+    "s "
+  ],
+  "key": {
+    "I": [
+      "minecraft:iron_ingot"
+    ],
+    "s": [
+      "minecraft:stick"
+    ]
+  },
+  "result": {
+    "id": "ultimatedtoolcasemc:throwing_knives",
+    "count": 1
+  }
+}

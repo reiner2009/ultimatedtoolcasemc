@@ -2,6 +2,7 @@ package de.reiner.toolcasemc.item;
 
 import de.reiner.toolcasemc.UltimatedToolCaseMC;
 import net.minecraft.core.Registry;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
@@ -10,7 +11,6 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ToolMaterial;
 
-import java.util.List;
 import java.util.function.Function;
 
 public class ModItems {
@@ -42,10 +42,16 @@ public class ModItems {
                     .axe(ToolMaterial.IRON, 1.0F, -1.0F)
     );
 
-    public static final Item MULTI_TOOL = register("multi_tool", MultiToolItem::new, new Item.Properties().durability(500));
+    public static final Item MULTI_TOOL = register("multi_tool", MultiToolItem::new,
+            new Item.Properties()
+                    .durability(500)
+                    .attributes(MultiToolItem.createAttributes())
+                    .delayedComponent(DataComponents.BLOCK_TRANSFORMER, context -> context.getOrThrow(ResourceKey.create(Registries.BLOCK_TRANSFORMER, Identifier.withDefaultNamespace("axe"))))
+    );
 
     public static final Item CHISEL=register("chisel", ChiselItem::new, new Item.Properties().stacksTo(1).durability(250));
     public static final Item SICKLE=register("sickle", SickleItem::new, new Item.Properties().sword(ToolMaterial.IRON, 3.0F, -2.4F));
+    public static final Item THROWING_KNIVES=register("throwing_knives", ThrowingKnivesItem::new, new Item.Properties().sword(ToolMaterial.IRON, 1.0F, 0.0F));
     public static final Item WARDEN_STAR=register("warden_star", Item::new, new Item.Properties());
 
 }

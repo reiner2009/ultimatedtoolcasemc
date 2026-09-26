@@ -2,5 +2,38 @@
 	"parent": "minecraft:item/generated",
 	"textures": {
 		"layer0": "ultimatedtoolcasemc:item/multi_tool"
+	},
+	"display": {
+		"thirdperson_righthand": {
+			"rotation": [0, -90, 0],
+			"translation": [0, 3.75, 2.25],
+			"scale": [4, 4, 1]
+		},
+		"thirdperson_lefthand": {
+			"rotation": [0, -90, 0],
+			"translation": [0, 3.75, 2.25],
+			"scale": [4, 4, 1]
+		},
+		"firstperson_righthand": {
+			"rotation": [0, 90, 0],
+			"scale": [2, 2, 1]
+		},
+		"firstperson_lefthand": {
+			"rotation": [0, 90, 0],
+			"scale": [2, 2, 1]
+		},
+		"ground": {
+			"translation": [0, -8, 0],
+			"scale": [4, 4, 1]
+		},
+		"gui": {
+			"scale": [1.4, 1.4, 1]
+		},
+		"fixed": {
+			"scale": [1.8, 1.8, 1]
+		},
+		"on_shelf": {
+			"scale": [1.4, 1.4, 1]
+		}
 	}
 }

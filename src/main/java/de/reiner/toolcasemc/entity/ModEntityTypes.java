@@ -34,4 +34,16 @@ public class ModEntityTypes {
                     .clientTrackingRange(4)
                     .updateInterval(20)
     );
+    public static final EntityType<ThrownKnive> KNIVE = register(
+            createID("knive"),
+            EntityType.Builder.<ThrownKnive>of(
+                            ThrownKnive::new,
+                            MobCategory.MISC
+                    )
+                    .noLootTable()
+                    .sized(0.3F, 0.3F)
+                    .eyeHeight(0.5F)
+                    .clientTrackingRange(4)
+                    .updateInterval(20)
+    );
 }

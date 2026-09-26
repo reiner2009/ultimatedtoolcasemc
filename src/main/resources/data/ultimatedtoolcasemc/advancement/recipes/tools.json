@@ -14,7 +14,8 @@
   "rewards": {
     "recipes": [
       "ultimatedtoolcasemc:sickle",
-      "ultimatedtoolcasemc:chisel"
+      "ultimatedtoolcasemc:chisel",
+      "ultimatedtoolcasemc:throwing_knives"
     ]
   }
 }
