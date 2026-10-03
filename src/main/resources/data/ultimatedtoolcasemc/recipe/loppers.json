@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " ID",
+    " sI",
+    "s  "
+  ],
+  "key": {
+    "I": [
+      "minecraft:shears"
+    ],
+    "s": [
+      "minecraft:stick"
+    ],
+    "D": [
+      "minecraft:diamond"
+    ]
+  },
+  "result": {
+    "id": "ultimatedtoolcasemc:loppers",
+    "count": 1
+  }
+}

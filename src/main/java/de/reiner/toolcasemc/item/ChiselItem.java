@@ -21,7 +21,6 @@ public class ChiselItem extends Item {
     private static final HashMap<Block, Block> BLOCK_HASH_MAP = new HashMap<>() {{
         put(Blocks.STONE, Blocks.STONE_BRICKS);
         put(Blocks.STONE_BRICKS, Blocks.CHISELED_STONE_BRICKS);
-        put(Blocks.COBBLESTONE, Blocks.STONE);
         put(Blocks.SANDSTONE, Blocks.CHISELED_SANDSTONE);
         put(Blocks.RED_SANDSTONE, Blocks.CHISELED_RED_SANDSTONE);
         put(Blocks.NETHER_BRICKS, Blocks.CHISELED_NETHER_BRICKS);

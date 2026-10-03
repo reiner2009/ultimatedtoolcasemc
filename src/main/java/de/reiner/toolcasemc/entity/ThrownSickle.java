@@ -30,11 +30,13 @@ import org.jspecify.annotations.Nullable;
 
 public class ThrownSickle extends AbstractArrow {
     private boolean dealtDamage = false;
+    private float rotation;
 
     public ThrownSickle(ServerLevel level, LivingEntity owner, ItemStack stack) {
         super(ModEntityTypes.SICKLE, level);
         this.setOwner(owner);
         this.setPickupItemStack(stack);
+        this.rotation=0;
     }
 
     public ThrownSickle(EntityType<ThrownSickle> entityType, Level level) {
@@ -65,7 +67,14 @@ public class ThrownSickle extends AbstractArrow {
                 }
             }
         }
+        if(!this.isInGround()){
+            this.rotation+=5.0F;
+        }
         super.tick();
+    }
+
+    public float getRotation(){
+        return this.rotation;
     }
 
     @Override

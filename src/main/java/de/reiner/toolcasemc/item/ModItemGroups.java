@@ -1,6 +1,7 @@
 package de.reiner.toolcasemc.item;
 
 import de.reiner.toolcasemc.UltimatedToolCaseMC;
+import de.reiner.toolcasemc.block.ModBlocks;
 import net.fabricmc.fabric.api.creativetab.v1.FabricCreativeModeTab;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -14,7 +15,7 @@ public class ModItemGroups {
             BuiltInRegistries.CREATIVE_MODE_TAB.key(), UltimatedToolCaseMC.id("tools")
     );
     public static final CreativeModeTab TOOL_ITEM_GROUP = FabricCreativeModeTab.builder()
-            .icon(() -> new ItemStack(ModItems.STONE_HAMMER))
+            .icon(() -> new ItemStack(ModBlocks.TOOL_CASE))
             .title(Component.translatable("creativeTab."+UltimatedToolCaseMC.MOD_ID))
             .displayItems((params, output) -> {
                 output.accept(ModItems.STONE_HAMMER);
@@ -26,6 +27,10 @@ public class ModItemGroups {
                 output.accept(ModItems.MULTI_TOOL);
                 output.accept(ModItems.WARDEN_STAR);
                 output.accept(ModItems.POINTED_CHISEL);
+                output.accept(ModItems.RAKE);
+                output.accept(ModItems.LOPPERS);
+                output.accept(ModItems.IGNITION_HOOK);
+                output.accept(ModBlocks.TOOL_CASE_ITEM);
             })
             .build();
     public static void init(){

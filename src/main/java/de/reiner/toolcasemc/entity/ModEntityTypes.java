@@ -46,4 +46,15 @@ public class ModEntityTypes {
                     .clientTrackingRange(4)
                     .updateInterval(20)
     );
+    public static final EntityType<Spark> SPARK = register(
+            createID("spark"),
+            EntityType.Builder.<Spark>of(
+                    Spark::new,
+                    MobCategory.MISC
+            )
+            .noLootTable()
+            .sized(0.25F, 0.25F)
+            .clientTrackingRange(4)
+            .updateInterval(10)
+    );
 }

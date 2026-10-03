@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "III",
+    "ILI",
+    "ICI"
+  ],
+  "key": {
+    "I": "minecraft:iron_ingot",
+    "L": "minecraft:leather",
+    "C": "minecraft:chest"
+  },
+  "result": {
+    "id": "ultimatedtoolcasemc:tool_case",
+    "count": 1
+  }
+}

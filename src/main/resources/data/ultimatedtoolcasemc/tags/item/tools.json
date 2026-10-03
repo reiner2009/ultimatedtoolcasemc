@@ -1,0 +1,26 @@
+{
+  "values": [
+    "ultimatedtoolcasemc:stone_hammer",
+    "ultimatedtoolcasemc:dirt_hammer",
+    "ultimatedtoolcasemc:wood_hammer",
+    "ultimatedtoolcasemc:multi_tool",
+    "ultimatedtoolcasemc:chisel",
+    "ultimatedtoolcasemc:sickle",
+    "ultimatedtoolcasemc:throwing_knives",
+    "ultimatedtoolcasemc:pointed_chisel",
+    "ultimatedtoolcasemc:rake",
+    "ultimatedtoolcasemc:loppers",
+    "ultimatedtoolcasemc:ignition_hook",
+    "minecraft:shears",
+    "#minecraft:pickaxes",
+    "#minecraft:hoes",
+    "#minecraft:axes",
+    "#minecraft:shovels",
+    "minecraft:fishing_rod",
+    "minecraft:flint_and_steel",
+    "minecraft:brush",
+    "minecraft:carrot_on_a_stick",
+    "minecraft:warped_fungus_on_a_stick",
+    "minecraft:spyglass"
+  ]
+}

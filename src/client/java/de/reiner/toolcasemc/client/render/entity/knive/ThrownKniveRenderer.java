@@ -22,6 +22,7 @@ public class ThrownKniveRenderer extends EntityRenderer<ThrownKnive, ThrownKnive
         this.model = new ThrownKniveEntityModel(context.bakeLayer(ModEntityModelLayers.KNIVE));
     }
 
+    @Override
     public void submit(final ThrownKniveRenderState state, final PoseStack poseStack, final SubmitNodeCollector submitNodeCollector, final CameraRenderState camera) {
         poseStack.pushPose();
         poseStack.rotateDegrees(Axis.YP, state.yRot - 90.0F);
@@ -31,14 +32,17 @@ public class ThrownKniveRenderer extends EntityRenderer<ThrownKnive, ThrownKnive
         super.submit(state, poseStack, submitNodeCollector, camera);
     }
 
+    @Override
     protected AABB getBoundingBoxForCulling(final ThrownKnive entity, final float partialTicks) {
         return super.getBoundingBoxForCulling(entity, partialTicks).inflate(1.5F);
     }
 
+    @Override
     public ThrownKniveRenderState createRenderState() {
         return new ThrownKniveRenderState();
     }
 
+    @Override
     public void extractRenderState(final ThrownKnive entity, final ThrownKniveRenderState state, final float partialTicks) {
         super.extractRenderState(entity, state, partialTicks);
         state.yRot = entity.getYRot(partialTicks);

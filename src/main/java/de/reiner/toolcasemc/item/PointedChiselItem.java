@@ -1,6 +1,6 @@
 package de.reiner.toolcasemc.item;
 
-import de.reiner.toolcasemc.tag.ModBlockTags;
+import de.reiner.toolcasemc.tag.ModTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -23,7 +23,7 @@ public class PointedChiselItem extends Item {
             Level level = (ServerLevel) context.getLevel();
             InteractionHand hand = context.getHand();
             Player player = (ServerPlayer) context.getPlayer();
-            if (context.getLevel().getBlockState(context.getClickedPos()).is(ModBlockTags.MINEABLE_WITH_POINTED_CHISEL)) {
+            if (context.getLevel().getBlockState(context.getClickedPos()).is(ModTags.MINEABLE_WITH_POINTED_CHISEL)) {
                 level.destroyBlock(blockPos, true, player, 512);
                 player.getItemInHand(hand).hurtAndBreak(1, player, hand);
                 return InteractionResult.SUCCESS;
@@ -31,7 +31,7 @@ public class PointedChiselItem extends Item {
                 return InteractionResult.FAIL;
             }
         } else {
-            if(context.getLevel().getBlockState(context.getClickedPos()).is(ModBlockTags.MINEABLE_WITH_POINTED_CHISEL)){
+            if(context.getLevel().getBlockState(context.getClickedPos()).is(ModTags.MINEABLE_WITH_POINTED_CHISEL)){
                 return InteractionResult.SUCCESS;
             } else {
                 return InteractionResult.FAIL;

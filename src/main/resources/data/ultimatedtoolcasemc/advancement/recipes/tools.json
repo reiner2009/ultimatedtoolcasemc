@@ -15,7 +15,10 @@
     "recipes": [
       "ultimatedtoolcasemc:sickle",
       "ultimatedtoolcasemc:chisel",
-      "ultimatedtoolcasemc:throwing_knives"
+      "ultimatedtoolcasemc:throwing_knives",
+      "ultimatedtoolcasemc:rake",
+      "ultimatedtoolcasemc:ignition_hook",
+      "ultimatedtoolcasemc:tool_case"
     ]
   }
 }

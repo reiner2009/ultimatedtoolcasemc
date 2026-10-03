@@ -1,0 +1,16 @@
+{
+	"parent": "minecraft:item/generated",
+	"textures": {
+		"layer0": "ultimatedtoolcasemc:item/tool_case"
+	},
+	"display": {
+		"thirdperson_righthand": {
+			"rotation": [90, 90, 0],
+			"translation": [0, -1, -5]
+		},
+		"thirdperson_lefthand": {
+			"rotation": [90, -90, 0],
+			"translation": [0, -1, -5]
+		}
+	}
+}

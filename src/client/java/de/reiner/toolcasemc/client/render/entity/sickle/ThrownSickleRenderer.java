@@ -22,25 +22,31 @@ public class ThrownSickleRenderer extends EntityRenderer<ThrownSickle, ThrownSic
         this.model = new ThrownSickleEntityModel(context.bakeLayer(ModEntityModelLayers.SICKLE));
     }
 
+    @Override
     public void submit(final ThrownSickleRenderState state, final PoseStack poseStack, final SubmitNodeCollector submitNodeCollector, final CameraRenderState camera) {
         poseStack.pushPose();
         poseStack.rotateDegrees(Axis.YP, state.yRot - 90.0F);
         poseStack.rotateDegrees(Axis.ZP, state.xRot + 90.0F);
+        poseStack.rotateDegrees(Axis.XP, state.rotation);
         submitNodeCollector.submitModel(this.model, state, poseStack, this.SICKLE_LOCATION, state.lightCoords, OverlayTexture.NO_OVERLAY, state.outlineColor);
         poseStack.popPose();
         super.submit(state, poseStack, submitNodeCollector, camera);
     }
 
+    @Override
     protected AABB getBoundingBoxForCulling(final ThrownSickle entity, final float partialTicks) {
         return super.getBoundingBoxForCulling(entity, partialTicks).inflate(1.5F);
     }
 
+    @Override
     public ThrownSickleRenderState createRenderState() {
         return new ThrownSickleRenderState();
     }
 
+    @Override
     public void extractRenderState(final ThrownSickle entity, final ThrownSickleRenderState state, final float partialTicks) {
         super.extractRenderState(entity, state, partialTicks);
+        state.rotation= entity.getRotation();
         state.yRot = entity.getYRot(partialTicks);
         state.xRot = entity.getXRot(partialTicks);
     }

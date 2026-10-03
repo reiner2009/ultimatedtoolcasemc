@@ -54,5 +54,7 @@ public class ModItems {
     public static final Item THROWING_KNIVES=register("throwing_knives", ThrowingKnivesItem::new, new Item.Properties().sword(ToolMaterial.IRON, 1.0F, 0.0F));
     public static final Item WARDEN_STAR=register("warden_star", Item::new, new Item.Properties());
     public static final Item POINTED_CHISEL=register("pointed_chisel", PointedChiselItem::new, new Item.Properties().durability(100).stacksTo(1));
-
+    public static final Item RAKE=register("rake", RakeItem::new, new Item.Properties().stacksTo(1).durability(250));
+    public static final Item LOPPERS=register("loppers", LoppersItem::new, new Item.Properties().durability(100).component(DataComponents.TOOL, LoppersItem.createToolProperties()));
+    public static final Item IGNITION_HOOK=register("ignition_hook", IgnitionHookItem::new, new Item.Properties().stacksTo(1).durability(250));
 }
