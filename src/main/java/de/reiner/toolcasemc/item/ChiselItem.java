@@ -41,6 +41,29 @@ public class ChiselItem extends Item {
         put(Blocks.GRANITE, Blocks.POLISHED_GRANITE);
         put(Blocks.DIORITE, Blocks.POLISHED_DIORITE);
         put(Blocks.ANDESITE, Blocks.POLISHED_ANDESITE);
+        put(Blocks.END_STONE, Blocks.END_STONE_BRICKS);
+        put(Blocks.SULFUR, Blocks.POLISHED_SULFUR);
+        put(Blocks.POLISHED_SULFUR, Blocks.SULFUR_BRICKS);
+        put(Blocks.RESIN_BLOCK, Blocks.RESIN_BRICKS);
+        put(Blocks.RESIN_BRICKS, Blocks.CHISELED_RESIN_BRICKS);
+        put(Blocks.PACKED_MUD, Blocks.MUD_BRICKS);
+        put(Blocks.COPPER_BLOCK.weathering().unaffected(), Blocks.CUT_COPPER.weathering().unaffected());
+        put(Blocks.CUT_COPPER.weathering().unaffected(), Blocks.CHISELED_COPPER.weathering().unaffected());
+        put(Blocks.COPPER_BLOCK.weathering().exposed(), Blocks.CUT_COPPER.weathering().exposed());
+        put(Blocks.CUT_COPPER.weathering().exposed(), Blocks.CHISELED_COPPER.weathering().exposed());
+        put(Blocks.COPPER_BLOCK.weathering().weathered(), Blocks.CUT_COPPER.weathering().weathered());
+        put(Blocks.CUT_COPPER.weathering().weathered(), Blocks.CHISELED_COPPER.weathering().weathered());
+        put(Blocks.COPPER_BLOCK.weathering().oxidized(), Blocks.CUT_COPPER.weathering().oxidized());
+        put(Blocks.CUT_COPPER.weathering().oxidized(), Blocks.CHISELED_COPPER.weathering().oxidized());
+        put(Blocks.COPPER_BLOCK.waxed().unaffected(), Blocks.CUT_COPPER.waxed().unaffected());
+        put(Blocks.CUT_COPPER.waxed().unaffected(), Blocks.CHISELED_COPPER.waxed().unaffected());
+        put(Blocks.COPPER_BLOCK.waxed().exposed(), Blocks.CUT_COPPER.waxed().exposed());
+        put(Blocks.CUT_COPPER.waxed().exposed(), Blocks.CHISELED_COPPER.waxed().exposed());
+        put(Blocks.COPPER_BLOCK.waxed().weathered(), Blocks.CUT_COPPER.waxed().weathered());
+        put(Blocks.CUT_COPPER.waxed().weathered(), Blocks.CHISELED_COPPER.waxed().weathered());
+        put(Blocks.COPPER_BLOCK.waxed().oxidized(), Blocks.CUT_COPPER.waxed().oxidized());
+        put(Blocks.CUT_COPPER.waxed().oxidized(), Blocks.CHISELED_COPPER.waxed().oxidized());
+
     }};
     public ChiselItem(Item.Properties properties){
         super(properties);
